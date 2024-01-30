@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net7.0</TargetFramework>
     <UserSecretsId>aspnet-ReversiMVCProper-D273C2F7-E622-4394-9AB2-4E3D4A299D03</UserSecretsId>
   </PropertyGroup>
 
