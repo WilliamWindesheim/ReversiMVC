@@ -1,0 +1,63 @@
+﻿@using System.Security.Claims
+@model IEnumerable<ReversiMVCProper.Models.Speler>
+
+@{
+    ViewData["Title"] = "Index";
+    var currentUserId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Naam
+            </th>
+            <th>
+                Gewonnen
+            </th>
+            <th>
+                Verloren
+            </th>
+            <th>
+                Gelijkgespeeld
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Naam)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AantalGewonnen)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AantalVerloren)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AantalGelijk)
+            </td>
+                <td>
+                    @if (Model.Any(speler => speler.Guid == currentUserId && speler.Roles != RolesEnum.Speler))
+                    {
+                        <a asp-action="Delete" asp-route-id="@item.Guid">Delete</a>
+                        <span> | </span>
+                        <a asp-action="EditRole" asp-route-id="@item.Guid">Role</a>
+                        <span> | </span>
+                    }
+                    @if (item.Guid == currentUserId)
+                    {
+                        <a asp-action="Edit" asp-route-id="@item.Guid">Edit</a>
+                    }
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,61 @@
+﻿@model Spel;
+@using System.Security.Claims;
+
+@{
+    ViewData["Title"] = "Play";
+    var currentUserId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+    var kleur = currentUserId == Model.Speler1Token ? "wit" : "zwart";
+        //TODO REVERSI
+        /*server, duh
+        tegenstander naam??
+        graph updaten??
+
+        3 rollen, spelers verwijderen
+        actief spel van speler verwijderen
+        tegenspeler melding geven (gewonnen misbruiken?)*/
+}
+<div class="wrapper">
+    <div class="left part">
+        <h6>Tegenstander: </h6>
+        <p id="tegenstanderLbl"></p>
+        <h6>Kat feitje: </h6>
+        <p id="dogLbl"></p>
+        <h6>Opties: </h6>
+        <div id="btnDiv">
+            <button class="btn" id="skipBtn">Passen</button>
+            <button class="btn" id="giveupBtn">Opgeven</button>
+        </div>
+    </div>
+    <div class="middle part">
+        <p id="Color">Kleur: wit</p>
+        <p id="Turn">beurt: wit</p>
+        <div id="board"></div>
+    </div>
+    <div class="right part">
+        <div class="chart-div">
+            <canvas id="colourChart"></canvas>
+            <canvas id="conqueredChart"></canvas>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
+    <script src="https://unpkg.com/regenerator-runtime@0.13.1/runtime.js"></script>
+    <link rel="stylesheet" href="~/css/style.min.css">
+    <script src="~/js/vendor.js"></script>
+    <script src="~/js/templates.js"></script>
+    <script src="~/js/app.js"></script>
+    <script>
+        $(function () {
+            $(function () {
+                Game.init('@Model.ID', '@currentUserId', afterInit, '@kleur');
+            });
+
+            function afterInit() {
+                Game.Reversi.updateNumberFact();
+                console.log('Game init voltooid');
+            }
+        });
+    </script>
+}

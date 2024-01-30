@@ -1,0 +1,50 @@
+﻿@using System.Security.Claims
+@model IEnumerable<ReversiMVCProper.Models.Spel>
+
+@{
+    ViewData["Title"] = "Index";
+
+    var user = User.FindFirst(ClaimTypes.NameIdentifier);
+    if (user != null)
+    {
+        var userid = user.Value;
+        Spel spel = Model.FirstOrDefault(s => s.Speler1Token == userid || s.Speler2Token == userid);
+        if (spel != null)
+        {
+            <script type="text/javascript"> 
+                alert("You are already in a game!");
+                location.href = '@Url.Action("Play", "Spels", new{id= spel.ID})';
+            </script>
+        }
+    }
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Omschrijving)
+            </th>
+            <th>
+                <a>Join spel</a>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Omschrijving)
+            </td>
+            <td>
+                <a asp-action="Play" asp-route-id="@item.ID">Join</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
