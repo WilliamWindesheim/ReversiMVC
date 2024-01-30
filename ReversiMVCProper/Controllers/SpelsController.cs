@@ -26,8 +26,13 @@ namespace ReversiMVCProper.Controllers
         public async Task<IActionResult> Index()
         {
             //TODO als je al in een actief spel zit redirect naar spel
-            var items = _service.GetAllOpenSpellen();
-            return View(items);
+            try{
+                var items = _service.GetAllOpenSpellen();
+                return View(items);
+            } catch(Exception ex)
+            {
+                return View(new List<Spel>());
+            }
         }
         //Get: Create
         public async Task<IActionResult> Create()

@@ -43,12 +43,19 @@ namespace ReversiMVCProper.Data
 
         public Spel GetSpelFromSpeler(string id)
         {
-            var answer = httpClient.GetAsync($"/api/spel/speler/spelertoken?spelertoken={id}").Result;
-            if (!answer.IsSuccessStatusCode)
+            try
+            {
+                var answer = httpClient.GetAsync($"/api/spel/speler/spelertoken?spelertoken={id}").Result;
+                if (!answer.IsSuccessStatusCode)
+                    return null;
+                var answerconverted = answer.Content.ReadAsStringAsync().Result;
+                Spel spel = JsonConvert.DeserializeObject<Spel>(answerconverted);
+                return spel;
+            }
+            catch (Exception ex)
+            {
                 return null;
-            var answerconverted = answer.Content.ReadAsStringAsync().Result;
-            Spel spel = JsonConvert.DeserializeObject<Spel>(answerconverted);
-            return spel;
+            }
         }
 
         public Spel CreateSpel(string spelerToken, string omschrijving)
