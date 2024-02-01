@@ -27,6 +27,8 @@ namespace ReversiMVCProper.Data
             var answer = httpClient.GetAsync("/api/spel/").Result;
             var answerconverted = answer.Content.ReadAsStringAsync().Result;
             var deser = JsonConvert.DeserializeObject<List<Spel>>(answerconverted);
+            if (deser == null)
+                return spellen;
             foreach(var item in deser)
             {
                 if (item == null) 
