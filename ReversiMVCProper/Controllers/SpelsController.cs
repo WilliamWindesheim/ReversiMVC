@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -31,7 +32,7 @@ namespace ReversiMVCProper.Controllers
                 return View(items);
             } catch(Exception ex)
             {
-                return View(new List<Spel>());
+                return View(new List<Spel>() { new Spel(){ Omschrijving=ex.Message + " | " + ex.ToString()} });
             }
         }
         //Get: Create
@@ -62,7 +63,7 @@ namespace ReversiMVCProper.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Omschrijving")] Spel spel)
         {
             var item = User.FindFirst(ClaimTypes.NameIdentifier);

@@ -15,8 +15,10 @@ namespace ReversiMVCProper.Data
 
         public ReversiApiService()
         {
-            httpClient = new();
-            httpClient.BaseAddress = new Uri("https://localhost:44325/");
+            httpClient = new()
+            {
+                BaseAddress = new Uri("https://localhost:5000/")
+            };
         }
 
         public List<Spel> GetAllOpenSpellen()
