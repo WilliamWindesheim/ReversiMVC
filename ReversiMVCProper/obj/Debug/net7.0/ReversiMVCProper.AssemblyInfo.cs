@@ -11,7 +11,7 @@
 using System;
 using System.Reflection;
 
-[assembly: Microsoft.AspNetCore.Identity.UI.UIFrameworkAttribute("Bootstrap4")]
+[assembly: Microsoft.AspNetCore.Identity.UI.UIFrameworkAttribute("Bootstrap5")]
 [assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("aspnet-ReversiMVCProper-D273C2F7-E622-4394-9AB2-4E3D4A299D03")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("ReversiMVCProper")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
