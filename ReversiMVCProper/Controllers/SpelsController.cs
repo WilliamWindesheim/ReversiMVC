@@ -80,7 +80,7 @@ namespace ReversiMVCProper.Controllers
             Speler speler = _context.Spelers.FirstOrDefault(s => s.Guid == currentuserid);
             if (speler == null)
             {
-                speler = new Speler() { Guid = currentuserid, Naam = "anoniem" };
+                speler = new Speler() { Guid = currentuserid, Naam = User.Identity.Name };
                 _context.Spelers.Add(speler);
                 _context.SaveChanges();
             }

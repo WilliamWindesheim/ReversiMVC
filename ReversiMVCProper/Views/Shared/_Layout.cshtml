@@ -5,11 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="Content-Security-Policy"
           content="base-uri 'self';
-               img-src data: https:;
-               object-src 'none';
-               style-src 'self' 'unsafe-hashes' 'sha256-biLFinpqYMtWHmXfkA1BPeCY0/fNt46SAZ+BBk5YUog=';
-               upgrade-insecure-requests;
-               frame-src 'self';">
+                img-src data: https:;
+                object-src 'none';
+                style-src 'self' 'sha256-biLFinpqYMtWHmXfkA1BPeCY0/fNt46SAZ+BBk5YUog=';
+                upgrade-insecure-requests;
+                frame-src 'self';
+                font-src 'self';
+                script-src 'unsafe-inline';
+                form-action 'none';
+                worker-src 'none';
+                ">
     <title>@ViewData["Title"] - Reversi William Kater</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
