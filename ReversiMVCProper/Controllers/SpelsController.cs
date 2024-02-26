@@ -72,6 +72,9 @@ namespace ReversiMVCProper.Controllers
             var item = User.FindFirst(ClaimTypes.NameIdentifier);
             if (item == null)
                 return Unauthorized();
+            var blacklist = new string[]{ "<script>", "/", "..\\", "http:", "https:", "www.", ".org", "\"", "'", ";", "<!--", "randomblob", "{", "}", "<xsl"};
+            if (blacklist.Any(spel.Omschrijving.Contains))
+                return BadRequest();
 
             var currentuserid = item.Value;
             Speler speler = _context.Spelers.FirstOrDefault(s => s.Guid == currentuserid);
