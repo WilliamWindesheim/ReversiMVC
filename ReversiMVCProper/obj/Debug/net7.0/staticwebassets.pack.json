@@ -17,10 +17,6 @@
       "PackagePath": "staticwebassets\\js\\app.js"
     },
     {
-      "Id": "C:\\Repos\\ReversiMVC\\ReversiMVCProper\\wwwroot\\js\\site.js",
-      "PackagePath": "staticwebassets\\js\\site.js"
-    },
-    {
       "Id": "C:\\Repos\\ReversiMVC\\ReversiMVCProper\\wwwroot\\js\\templates.js",
       "PackagePath": "staticwebassets\\js\\templates.js"
     },

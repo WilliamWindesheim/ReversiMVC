@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -26,6 +26,8 @@ namespace ReversiMVCProper.Controllers
         // GET: spels
         public async Task<IActionResult> Index()
         {
+            Console.WriteLine("Console");
+            Debug.WriteLine("Debug");
             //TODO als je al in een actief spel zit redirect naar spel
             try{
                 var items = _service.GetAllOpenSpellen();

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "CUVpmtVreLU/NwatKmbA+233r+u8FItQj8WwOzF2Mlg=",
+  "Hash": "O1xU8kPbQ8/diMk5thz47F63GaAuvxCia2wSj1KrbrU=",
   "Source": "ReversiMVCProper",
   "BasePath": "_content/ReversiMVCProper",
   "Mode": "Default",
@@ -83,23 +83,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\app.js"
-    },
-    {
-      "Identity": "C:\\Repos\\ReversiMVC\\ReversiMVCProper\\wwwroot\\js\\site.js",
-      "SourceId": "ReversiMVCProper",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Repos\\ReversiMVC\\ReversiMVCProper\\wwwroot\\",
-      "BasePath": "_content/ReversiMVCProper",
-      "RelativePath": "js/site.js",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\js\\site.js"
     },
     {
       "Identity": "C:\\Repos\\ReversiMVC\\ReversiMVCProper\\wwwroot\\js\\templates.js",
