@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.EntityFrameworkCore;
@@ -40,6 +41,16 @@ namespace ReversiMVCProper
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
+	    //services.AddHsts(options =>
+            //{
+            //    options.MaxAge = TimeSpan.FromDays(365);
+            //    options.IncludeSubDomains = true;
+            //    options.Preload = true;
+            //});
+	    services.Configure<IdentityOptions>(options =>
+            {
+                options.SignIn.RequireConfirmedAccount = false;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -54,8 +65,23 @@ namespace ReversiMVCProper
             {
                 app.UseExceptionHandler("/Home/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
+                //app.UseHsts();
             }
+
+            app.UseCookiePolicy(new CookiePolicyOptions
+            {
+                Secure = CookieSecurePolicy.Always,
+                MinimumSameSitePolicy = SameSiteMode.Strict,
+            });
+	    app.Use(async (context, next) =>
+	    {
+		context.Response.Headers.Add("X-Frame-Options", "DENY");
+                context.Response.Headers.Add("X-Content-Type-Options", "nosniff");
+		context.Response.Headers.Add("Strict-Transport-Security", "max-age=31536000; includeSubDomains; preload");
+                context.Response.Headers.Add("Content-Security-Policy", "frame-ancestors 'none'");
+		await next();
+	    });
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 

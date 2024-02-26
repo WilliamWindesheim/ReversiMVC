@@ -5,15 +5,15 @@
     ViewData["Title"] = "Play";
     var currentUserId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
     var kleur = currentUserId == Model.Speler1Token ? "wit" : "zwart";
-        //TODO REVERSI
-        /*server, duh
-        tegenstander naam??
-        graph updaten??
-
-        3 rollen, spelers verwijderen
-        actief spel van speler verwijderen
-        tegenspeler melding geven (gewonnen misbruiken?)*/
 }
+
+<nav id="feedback" class="alert" style="display: none;">
+    <div id="feedback-top">
+        <p id="feedback-text">De wedstrijd is geeindigt in een gelijkspel!</p>
+    </div>
+    <button class="btn" id="btn-akkoord">Spel verlaten</button>
+</nav>
+
 <div class="wrapper">
     <div class="left part">
         <h6>Tegenstander: </h6>
@@ -40,7 +40,6 @@
 </div>
 
 @section Scripts {
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
     <script src="https://unpkg.com/regenerator-runtime@0.13.1/runtime.js"></script>
     <link rel="stylesheet" href="~/css/style.min.css">
     <script src="~/js/vendor.js"></script>
@@ -49,6 +48,7 @@
     <script>
         $(function () {
             $(function () {
+		$("#btn-akkoord").on("click", function(){  window.location = `${window.location.origin}/Endgame?id=${@Model.ID}`;});
                 Game.init('@Model.ID', '@currentUserId', afterInit, '@kleur');
             });
 

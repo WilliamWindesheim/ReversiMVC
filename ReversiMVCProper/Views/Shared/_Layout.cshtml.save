@@ -5,9 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="Content-Security-Policy"
           content="base-uri 'self';
-               img-src data: https:;
+               default-src 'self';
+               img-src: 'none';
                object-src 'none';
-               style-src 'self' 'unsafe-hashes' 'sha256-biLFinpqYMtWHmXfkA1BPeCY0/fNt46SAZ+BBk5YUog=';
+               script-src 'self';
+	       unsafe-inline;
+               style-src 'self';
                upgrade-insecure-requests;
                frame-src 'self';">
     <title>@ViewData["Title"] - Reversi William Kater</title>
@@ -50,6 +53,7 @@
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

@@ -32,7 +32,8 @@ namespace ReversiMVCProper.Controllers
                 return View(items);
             } catch(Exception ex)
             {
-                return View(new List<Spel>() { new Spel(){ Omschrijving=ex.Message + " | " + ex.ToString()} });
+		string msg = ex.Message.Contains("SSL") ? "The API is offline" : "Oopsie, something went wrong";
+                return View(new List<Spel>() { new Spel(){ Omschrijving = msg} });
             }
         }
         //Get: Create
@@ -97,25 +98,27 @@ namespace ReversiMVCProper.Controllers
                 return Redirect(Url.Action("Index", "Spelers"));
             Speler speler1 = _context.Spelers.FirstOrDefault(s => s.Guid == spel.Speler1Token);
             Speler speler2 = _context.Spelers.FirstOrDefault(s => s.Guid == spel.Speler2Token);
-            if (speler1 == null || speler2 == null)
+            
+            if (speler1 == null)
                 return Redirect(Url.Action("Index", "Spelers"));
 
-            var winnaar = spel.Winnaar == 1 ? speler1.Guid : (spel.Winnaar == 2 ? speler2.Guid : String.Empty);
-            
-            if (winnaar == String.Empty)
-            {
-                speler1.AantalGelijk++;
-                speler2.AantalGelijk++;
-            } else if (speler1.Guid == winnaar){
+            if (spel.Winnaar == 1){
                 speler1.AantalGewonnen++;
-                speler2.AantalVerloren++;
-            } else{
+                if (speler2 != null)
+                    speler2.AantalVerloren++;
+            } else if (spel.Winnaar == 2){
                 speler1.AantalVerloren++;
-                speler2.AantalGewonnen++;
+                if (speler2 != null)
+                    speler2.AantalGewonnen++;
+            } else if (spel.Winnaar == 3){
+                speler1.AantalGelijk++;
+                if (speler2 != null)
+                    speler2.AantalGelijk++;
             }
             
             _context.Entry(speler1).State = EntityState.Modified;
-            _context.Entry(speler2).State = EntityState.Modified;
+	    if (speler2 != null)
+            	    _context.Entry(speler2).State = EntityState.Modified;
             _context.SaveChanges();
             _service.EndGame(id);
 
