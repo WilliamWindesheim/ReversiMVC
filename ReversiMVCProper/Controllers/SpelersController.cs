@@ -103,6 +103,8 @@ namespace ReversiMVCProper.Controllers
                 if (currentSpeler == null || currentSpeler.Roles == RolesEnum.Speler)
                     return NotFound();
             }
+            if (speler.Naam.Length > 20)
+                return BadRequest();
 
             if (ModelState.IsValid)
             {

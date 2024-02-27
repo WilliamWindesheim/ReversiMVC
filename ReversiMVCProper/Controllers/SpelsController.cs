@@ -31,6 +31,16 @@ namespace ReversiMVCProper.Controllers
             //TODO als je al in een actief spel zit redirect naar spel
             try{
                 var items = _service.GetAllOpenSpellen();
+                
+                var user = User.FindFirst(ClaimTypes.NameIdentifier);
+                if (user != null)
+                {
+                    var userid = user.Value;
+                    Spel spel = items.FirstOrDefault(s => s.Speler1Token == userid || s.Speler2Token == userid);
+                    if (spel != null)
+                        return RedirectToAction("Play", new {id = spel.ID });
+                }
+
                 return View(items);
             } catch(Exception ex)
             {

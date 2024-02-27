@@ -3,20 +3,6 @@
 
 @{
     ViewData["Title"] = "Index";
-
-    var user = User.FindFirst(ClaimTypes.NameIdentifier);
-    if (user != null)
-    {
-        var userid = user.Value;
-        Spel spel = Model.FirstOrDefault(s => s.Speler1Token == userid || s.Speler2Token == userid);
-        if (spel != null)
-        {
-            <script type="text/javascript"> 
-                alert("You are already in a game!");
-                location.href = '@Url.Action("Play", "Spels", new{id= spel.ID})';
-            </script>
-        }
-    }
 }
 
 <h1>Index</h1>

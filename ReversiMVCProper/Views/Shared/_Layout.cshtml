@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+@{ViewData["initNonce"] = Convert.ToBase64String(System.Security.Cryptography.RandomNumberGenerator.GetBytes(20));}
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -7,12 +8,12 @@
           content="base-uri 'self';
                 img-src data: https:;
                 object-src 'none';
-                style-src 'self' 'sha256-biLFinpqYMtWHmXfkA1BPeCY0/fNt46SAZ+BBk5YUog=';
+                style-src 'self' 'unsafe-hashes' 'sha256-biLFinpqYMtWHmXfkA1BPeCY0/fNt46SAZ+BBk5YUog=';
                 upgrade-insecure-requests;
                 frame-src 'self';
                 font-src 'self';
-                script-src 'unsafe-inline';
-                form-action 'none';
+                script-src 'self' 'unsafe-hashes' https://unpkg.com/regenerator-runtime@0.13.1/runtime.js 'nonce-@ViewData["initNonce"]' 'sha256-JvelFac2veSDH47Ltqv1m5Cr2kZixUO5jmpozKC3rhY=';
+                form-action 'self';
                 worker-src 'none';
                 ">
     <title>@ViewData["Title"] - Reversi William Kater</title>
