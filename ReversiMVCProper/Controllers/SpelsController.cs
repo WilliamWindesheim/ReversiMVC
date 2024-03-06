@@ -26,9 +26,6 @@ namespace ReversiMVCProper.Controllers
         // GET: spels
         public async Task<IActionResult> Index()
         {
-            Console.WriteLine("Console");
-            Debug.WriteLine("Debug");
-            //TODO als je al in een actief spel zit redirect naar spel
             try{
                 var items = _service.GetAllOpenSpellen();
                 
@@ -68,8 +65,10 @@ namespace ReversiMVCProper.Controllers
                 return NotFound();
             if (spel.Speler1Token != currentUserId)
                 _service.JoinSpel(currentUserId, id);
-            return View(spel);
 
+	    ViewData["nonce"] = Convert.ToBase64String(System.Security.Cryptography.RandomNumberGenerator.GetBytes(20));
+
+            return View(spel);
         }
 
         // POST: Spels/Create

@@ -41,7 +41,10 @@ namespace ReversiMVCProper.Data
         {
             var answer = httpClient.GetAsync($"/api/spel/{id}").Result;
             var answerconverted = answer.Content.ReadAsStringAsync().Result;
-            var spel = JsonConvert.DeserializeObject<Spel>(answerconverted);
+            
+	    if (answerconverted == "Spel bestaat niet!")
+		return null;
+	    var spel = JsonConvert.DeserializeObject<Spel>(answerconverted);
             return spel;
         }
 
