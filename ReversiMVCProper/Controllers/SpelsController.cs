@@ -6,6 +6,8 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.CodeAnalysis.Scripting;
+using Microsoft.CodeAnalysis;
 using Microsoft.EntityFrameworkCore;
 using ReversiMVCProper.Data;
 using ReversiMVCProper.Models;

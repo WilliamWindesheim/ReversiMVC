@@ -45,6 +45,7 @@ namespace ReversiMVCProper
 	        services.Configure<IdentityOptions>(options =>
                 {
                     options.SignIn.RequireConfirmedAccount = false;
+                    options.Password.RequiredLength = 12;
                 });
             }
 
